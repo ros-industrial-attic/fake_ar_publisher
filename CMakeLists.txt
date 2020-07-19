@@ -25,7 +25,7 @@ find_package(visualization_msgs REQUIRED)
 # Custom interface generation
 find_package(rosidl_default_generators REQUIRED)
 
-rosidl_generate_interfaces(${PROJECT_NAME}_interfaces
+rosidl_generate_interfaces(${PROJECT_NAME}
     msg/ARMarker.msg
   DEPENDENCIES
     geometry_msgs
@@ -35,7 +35,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}_interfaces
 # Build and install targets
 add_executable(${PROJECT_NAME}_node src/fake_ar_publisher.cpp)
 ament_target_dependencies(${PROJECT_NAME}_node rclcpp geometry_msgs visualization_msgs)
-rosidl_target_interfaces(${PROJECT_NAME}_node ${PROJECT_NAME}_interfaces "rosidl_typesupport_cpp")
+rosidl_target_interfaces(${PROJECT_NAME}_node ${PROJECT_NAME} "rosidl_typesupport_cpp")
 
 install(TARGETS ${PROJECT_NAME}_node
   RUNTIME DESTINATION lib/${PROJECT_NAME}
