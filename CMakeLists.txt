@@ -35,7 +35,10 @@ rosidl_generate_interfaces(${PROJECT_NAME}
 # Build and install targets
 add_executable(${PROJECT_NAME}_node src/fake_ar_publisher.cpp)
 ament_target_dependencies(${PROJECT_NAME}_node rclcpp geometry_msgs visualization_msgs)
-rosidl_target_interfaces(${PROJECT_NAME}_node ${PROJECT_NAME} "rosidl_typesupport_cpp")
+
+rosidl_get_typesupport_target(cpp_typesupport_target ${PROJECT_NAME} "rosidl_typesupport_cpp")
+target_link_libraries(${PROJECT_NAME}_node "${cpp_typesupport_target}") 
+
 
 install(TARGETS ${PROJECT_NAME}_node
   RUNTIME DESTINATION lib/${PROJECT_NAME}
@@ -55,3 +58,4 @@ endif()
 # Ament package settings
 ament_export_dependencies(rclcpp geometry_msgs visualization_msgs)
 ament_package()
+
