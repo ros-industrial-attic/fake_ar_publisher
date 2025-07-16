@@ -31,15 +31,13 @@ rosidl_generate_interfaces(${PROJECT_NAME}
     geometry_msgs
     std_msgs
 )
+rosidl_get_typesupport_target(cpp_typesupport_target
+  ${PROJECT_NAME} rosidl_typesupport_cpp)
 
 # Build and install targets
 add_executable(${PROJECT_NAME}_node src/fake_ar_publisher.cpp)
 ament_target_dependencies(${PROJECT_NAME}_node rclcpp geometry_msgs visualization_msgs)
-rosidl_target_interfaces(${PROJECT_NAME}_node ${PROJECT_NAME} "rosidl_typesupport_cpp")
-
-install(TARGETS ${PROJECT_NAME}_node
-  RUNTIME DESTINATION lib/${PROJECT_NAME}
-)
+target_link_libraries(${PROJECT_NAME}_node "${cpp_typesupport_target}")
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
