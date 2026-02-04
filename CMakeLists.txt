@@ -39,6 +39,10 @@ add_executable(${PROJECT_NAME}_node src/fake_ar_publisher.cpp)
 ament_target_dependencies(${PROJECT_NAME}_node rclcpp geometry_msgs visualization_msgs)
 target_link_libraries(${PROJECT_NAME}_node "${cpp_typesupport_target}")
 
+install(TARGETS ${PROJECT_NAME}_node
+  RUNTIME DESTINATION lib/${PROJECT_NAME}
+)
+
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   # the following line skips the linter which checks for copyrights
